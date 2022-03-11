@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// レストラン一覧画面を表示
+Route::get('/', 'RestaurantController@showList')->name('restaurants');
+Route::get('/reviews', 'ReviewtController@create')->name('restaurants');
