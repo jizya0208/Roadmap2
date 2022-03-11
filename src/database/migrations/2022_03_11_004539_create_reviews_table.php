@@ -12,9 +12,9 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
+    {   if (!Schema::hasTable('restaurants')) {
+        Schema::create('restaurants', function (Blueprint $table) {
+          $table->id();
             $table->foreignId('restaurant_id')->constrained();
             $table->double('star');
             $table->text('comment');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
+}
     /**
      * Reverse the migrations.
      *
