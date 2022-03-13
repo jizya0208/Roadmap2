@@ -4,16 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Restaurant;
 
-class DatabaseSeeder extends Seeder
+class RestaurantTableSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->call(RestaurantTableSeeder::Class);    // 追記
+        \App\Models\Restaurant::factory()->count(15)->create();
     }
 }

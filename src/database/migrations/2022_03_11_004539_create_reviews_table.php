@@ -12,8 +12,8 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {   if (!Schema::hasTable('restaurants')) {
-        Schema::create('restaurants', function (Blueprint $table) {
+    {   if (!Schema::hasTable('reviews')) {
+        Schema::create('reviews', function (Blueprint $table) {
           $table->id();
             $table->foreignId('restaurant_id')->constrained();
             $table->double('star');

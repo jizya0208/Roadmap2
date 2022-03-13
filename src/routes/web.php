@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 // レストラン一覧画面を表示
-Route::get('/', 'RestaurantController@showList')->name('restaurants');
-Route::get('/reviews', 'ReviewtController@create')->name('restaurants');
+Route::get('/', 'App\Http\Controllers\RestaurantController@showList')->name('restaurants');
+// Route::get('/reviews', 'app\Http\Controllers\ReviewtController@create')->name('reviews');
