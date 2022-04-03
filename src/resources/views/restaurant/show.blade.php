@@ -1,14 +1,47 @@
 @extends('layout')
 @section('title', 'レビュー')
 @section('content')
+
+<script src="https://unpkg.com/vue-star-rating/dist/VueStarRating.umd.min.js"></script>
+
 <div class="container px-5 py-24 mx-auto flex justify-center">
-    <div class="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 w-full mt-10 md:mt-0 relative z-10 shadow-md">
+    <div class="lg:w-2/5 md:w-1/2 bg-white rounded-lg p-8 w-full mt-10 md:mt-0 relative z-10 shadow-md">
         <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">レビュー一覧</h2>
+            @if($restaurant->reviews->isNotEmpty())
+                @foreach ($restaurant->reviews as $review)
+                    <div class="border-bottom border-secondary pt-2">
+                        <p class="text-muted mx-3 pt-1">{{ $review->name }}
+                            が{{ $review->created_at->format('Y年n月j日') }}に投稿</p>
+                        <p class="text-muted mx-3">{!! nl2br(e($review->comment)) !!}</p>
+                    </div>
+                    @endforeach
+                    {{--            TODO:↓コメント入力欄、コメントボタンの設置--}}
+                @else
+                    <p class="text-center pt-2">コメントはまだ投稿されていません。</p>
+            @endif
+        <div id="star">
+         <star-rating v-model:rating="rating"></star-rating>
+        </div>
+        <!-- <div id="app">
+            <h2>basic</h2>
+            <star-rating v-model="rating"></star-rating>
+            <star-rating v-model:rating="rating"></star-rating>
+        </div> -->
 
 
-        <!-- foreach ($reviews as $review) {
-    
-        } -->
+        <script> 
+
+
+            // Vue.component('star-rating', StarRating);
+            // const app = new Vue({
+            //     el: '#star',
+            //     data: {
+            //         rating: 0
+            //     }
+            // });
+        </script>
+
+        <button class="custom-btn">Button</button>
         <p>{{ $restaurant->name }}へのご意見をお聞かせください</p>
         <form method="POST" action="{{ route('restaurant.reviews.store', $restaurant) }}" onSubmit="return checkSubmit()">
             @csrf
@@ -16,7 +49,8 @@
                 <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="name">
                   お名前
                 </label>
-                <input id="name" name="name" class="form-control bg-gray-50 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-purple-500 focus:outline-none focus:shadow-outline" value="{{ old('name') }}" type="text">
+                <input id="name" name="name" class="bg-gray-50 shadow appearance-none border rounded
+                 w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-purple-500 focus:outline-none focus:shadow-outline" value="{{ old('name') }}" type="text">
                 @if ($errors->has('name'))
                     <div class="text-danger">
                         {{ $errors->first('name') }}
@@ -67,21 +101,47 @@
                 @endif
             </div>
 
+            <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="star">評価</label>
+            <select name="star" class="form-control" type="text">
+                @foreach(config('score') as $key => $score)
+                    <option value="{{ $key }}">{{ $score }}</option>
+                @endforeach
+            </select>
+
+
+            <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="is_receivable">メール送信可否</label>
+            <input id="is_receivable" name="is_receivable" type="checkbox" checked="checked" value="1">
+
             <div class="mt-5">
-                <button class="block shadow text-purple-400 hover:bg-purple-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="button">
+                <button class="block shadow text-purple-400 hover:bg-purple-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="submit">
                     投稿する
                 </button>
             </div>
         </form>
     </div>
 </div>
+<script src="{{ asset('js/app.js') }}"></script>
 <script>
+
 function checkSubmit(){
-if(window.confirm('送信してよろしいですか？')){
-    return true;
-} else {
-    return false;
+    if(window.confirm('送信してよろしいですか？')){
+        return true;
+    } else {
+        return false;
+    }
 }
-}
+
+const app = Vue.createApp({ 
+    methods: {
+    setRating(rating){
+      this.rating= rating;
+    }
+    },
+    data: {
+        rating: 0
+    }
+ })
+app.component('star-rating', VueStarRating.default)
+app.mount('#star')
 </script>
 @endsection

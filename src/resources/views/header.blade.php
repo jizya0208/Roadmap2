@@ -5,7 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-             <a class="nav-item nav-link active" href="{{ route('restaurants') }}">ブログ一覧 <span class="sr-only"></span></a>
+             <a class="nav-item nav-link active" href="{{ route('restaurant.index') }}">レストラン一覧 <span class="sr-only"></span></a>
         </div>
     </div>
 </nav>

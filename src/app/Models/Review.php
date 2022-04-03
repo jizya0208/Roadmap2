@@ -12,4 +12,20 @@ class Review extends Model
     {
         return $this->belongsTo(Restaurant::class);
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'comment',
+        'restaurant_id',
+        'gender',
+        'age',
+        'star',
+        'is_receivable',
+    ];
 }

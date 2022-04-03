@@ -2,6 +2,7 @@
 <html lang="ja">
   <head>
       <meta charset="UTF-8">
+      <!-- csrf対策のためのトークン -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
       <title>@yield('title')</title>
       <link rel="stylesheet" href="/css/app.css">
@@ -11,10 +12,10 @@
     <header>
       @include('header')
     </header>
-    <div class="container">
+    <div class="bg-slate-100">
       @yield('content')
     </div>
-    <footer class="footer bg-dark  fixed-bottom">
+    <footer class="footer bg-amber-200 fixed-bottom">
       @include('footer')
     </footer>
   </body>

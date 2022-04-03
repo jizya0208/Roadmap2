@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'restaurants', // 変更
     ],
 
     /*
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'restaurants',
         ],
     ],
 
@@ -62,7 +62,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\User::class,
+        ],
+
+        //下記を追加
+        'restaurants' => [
+            'driver' => 'eloquent',
+            'model' => App\Restaurants::class,
         ],
 
         // 'users' => [
@@ -87,8 +93,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'restaurants' => [
+            'provider' => 'restaurants',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
