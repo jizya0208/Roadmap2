@@ -12,21 +12,19 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {   if (!Schema::hasTable('restaurants')) {
-        Schema::create('restaurants', function (Blueprint $table) {
+    {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->unique();
-            $table->string('image_id')->default('no-image.png');
-            $table->text('description')->nullable();
-            $table->string('address')->nullable();
-            $table->string('email');
+            $table->string('name');
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->foreignId('current_team_id')->nullable();
+            $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });
     }
-}
 
     /**
      * Reverse the migrations.
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('restaurants');
+        Schema::dropIfExists('users');
     }
 };

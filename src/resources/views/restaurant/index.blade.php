@@ -5,24 +5,38 @@
 @section('content')
 
 <div class="container px-5 py-24 mx-auto flex justify-center">
-  <div class="lg:w-2/5 md:w-1/2 bg-white rounded-lg p-8 w-full mt-10 md:mt-0 relative z-10 shadow-md">
+  <div class="lg:w-3/5 md:w-1/2 bg-white rounded-lg p-8 w-full mt-10 md:mt-0 relative z-10 shadow-md">
   <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">レストラン一覧</h2>
   <ul class="flex flex-col">
     @foreach($restaurants as $restaurant)
       <li>
-        <h2>{{ $restaurant->name }}</h2>
+        <h3 class="heading">
+          <i class="fas fa-utensils"></i>
+          {{ $restaurant->name }}
+        </h3>
         <div class="thumb">
-          <img src="{{ asset('storage/' . $restaurant->image_id) }}" alt="" width="200" height="300">
+          @if($restaurant->image_id == "no-image.png")
+            <img src="{{ asset('no-image.png')}}" alt="">
+          @else
+            <img src="{{ asset('storage/' . $restaurant->image_id) }}" alt="">
+          @endif
         </div>
         <p>{{ $restaurant->description }}<p>
-        <div class="">レビュー数：</div>
-        <div><a href="{{ route('restaurant.show', ['restaurant'=>$restaurant->id]) }}" class="btn btn-primary">レビューを見る</a></div>
+        <div class="avg-wrap mb-2">
+          @if($restaurant->reviews->isNotEmpty())
+              <i class="fas fa-star"></i>
+              {{ round($restaurant->reviews->avg('star'), 1, PHP_ROUND_HALF_UP) }}
+              (レビュー件数：{{ $restaurant->reviews->count() }})
+          @else
+              <p class="text-center pt-2">評価がまだ投稿されていません。</p>
+          @endif
+        </div>
+        <a href="{{ route('restaurant.show', ['restaurant'=>$restaurant->id]) }}">
+          <button class="bg-transparent hover:bg-orange-500 text-orange-700 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded">
+            <i class="fas fa-arrow-right mr-3"></i>詳細
+          </button>
+        </a>
         <div><a href="{{ route('restaurant.edit', ['restaurant'=>$restaurant->id]) }}" class="btn btn-primary">編集</a></div>
-        @if($restaurant->reviews->isNotEmpty())
-            {{ round($restaurant->reviews->avg('star'), 1, PHP_ROUND_HALF_UP) }}
-        @else
-            <p class="text-center pt-2">評価がまだ投稿されていません。</p>
-        @endif
 
         <!-- 削除ボタン -->
         <form action="{{ route('restaurant.destroy',$restaurant->id) }}" method="POST">
@@ -36,6 +50,8 @@
         </form>
       </li>
     @endforeach
+
+    {{ $restaurants->links() }}
   </ul>
 </div>
 @endsection

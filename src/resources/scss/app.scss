@@ -1,0 +1,10 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+.custom-btn {
+    @apply btn btn-accent rounded-full shadow-md border-4 border-accent-focus;
+}
+
+

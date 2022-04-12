@@ -19,12 +19,28 @@ use App\Http\Controllers\ReviewController;
 Route::get('/', 'App\Http\Controllers\RestaurantController@index')->name('restaurants');
 Route::resource('restaurant', RestaurantController::class);
 Route::resource('restaurant.reviews', ReviewController::class);
-// // Route::get('/reviews', 'app\Http\Controllers\ReviewtController@create')->name('reviews');
-// Route::get('/restaurant/create', 'App\Http\Controllers\RestaurantController@showCreate')->name('restaurant.create');
-// Route::post('/restaurant/store', 'App\Http\Controllers\RestaurantController@execStore')->name('restaurant.store');
-// Route::get('/restaurant/show/{id}', 'App\Http\Controllers\RestaurantController@showDetail')->name('restaurant.show');
-// Route::post('/restaurant・/delete/{id}', [ContentController::class, 'delete'])->name('delete');
+Route::get('/admin/login', function () {
+    return view('adminLogin'); // blade.php
+});
+Route::post('/admin/login', [\App\Http\Controllers\LoginController::class, 'adminLogin'])->name('admin.login');
+
+Route::middleware('auth:admins')->group(function () {
+    Route::get('/admin/dashboard', [\App\Http\Controllers\AdminDashboardController::class, 'index']);
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+//検索結果を表示する
+Route::get('/search', 'App\Http\Controllers\AdminDashboardController@search')->name('search');
+
+// Route::prefix('admin')->group(function () {
+//     Route::get('login', [LoginController::class, 'create'])->name('admin.login');
+//     Route::post('login', [LoginController::class, 'store']);
+
+//     Route::middleware('auth:admin')->group(function () {
+//         Route::get('dashboard', [AdminDashboardController::class, 'index']);
+//     });
+// });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Review;
+use App\Enums\Gender;
+use App\Enums\Age;
 
 class ReviewController extends Controller
 {
@@ -37,10 +39,22 @@ class ReviewController extends Controller
         $review->gender = $request['gender'];
         $review->age = $request['age'];
         $review->star = $request['star'];
-        
+
         $review->is_receivable = $request['is_receivable'];
 
         $review->save();
         return redirect(route('restaurant.index'))->with('success', '正常に投稿されました');
+    } 
+
+    public function show($id)
+    {
+        $review = Review::find($id);
+        return view('review.show', compact('review'));
+    } 
+    
+    public function destroy($id)
+    {
+        Review::find($id)->delete();
+        return redirect(route('admin.dashboard'))->with('success','削除しました');
     } 
 }

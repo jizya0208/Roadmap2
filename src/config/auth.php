@@ -40,7 +40,13 @@ return [
             'driver' => 'session',
             'provider' => 'restaurants',
         ],
+        // 追加
+        'admins' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +74,12 @@ return [
         //下記を追加
         'restaurants' => [
             'driver' => 'eloquent',
-            'model' => App\Restaurants::class,
+            'model' => App\Models\Restaurant::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [
@@ -95,6 +106,12 @@ return [
     'passwords' => [
         'restaurants' => [
             'provider' => 'restaurants',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

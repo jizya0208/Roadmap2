@@ -26,6 +26,7 @@ class Restaurant extends Authenticatable
         'image_id',
         'description',
         'address',
+        'password',
     ];
 
     /**

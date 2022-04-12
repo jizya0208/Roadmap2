@@ -15,6 +15,8 @@ class RestaurantTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Restaurant::factory()->count(15)->create();
+        // \Illuminate\Support\Facades\DB::table('restaurants')->truncate(); // data clear
+        // \Illuminate\Support\Facades\DB::table('reviews')->truncate(); // data clear
+        \App\Models\Restaurant::factory()->count(15)->create(); // data insert
     }
 }
