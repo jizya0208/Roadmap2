@@ -44,5 +44,12 @@
                 </x-jet-button>
             </div>
         </form>
+        <div class="mt-5 mb-2">
+            <a class="btn border-double border-4 border-indigo-600 p-3" href="{{ route('register') }}">
+                <span class="">
+                    新規登録
+                </span>
+            </a>
+        </div>
     </x-jet-authentication-card>
 </x-guest-layout>

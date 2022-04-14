@@ -8,6 +8,8 @@
       <link rel="stylesheet" href="/css/app.css">
       <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
       <script src="/js/app.js" defer></script>
+      <!-- Required popper.js -->
+      <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
   </head>
   <body>
     <header>

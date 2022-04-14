@@ -5,13 +5,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-             <a class="nav-item nav-link active" href="{{ route('restaurant.index') }}">レストラン <span class="sr-only"></span></a>
+             <a class="nav-item nav-link active" href="{{ route('restaurant.index') }}">
+                <span class="sr-only">
+                    <i class="nav-icon fas fa-home"></i>
+                </span>
+            </a>
         </div>
     </div>
 
     <!-- Authentication -->
     @if(Auth::check())
-        <p>ようこそ{{ Auth::user()->name }}さん</p>
+        <p>ようこそ{{ Auth::user()->name }}さん *{{ Auth::user()->id == $restaurant->id; }}</p>
         <form method="POST" action="{{ route('logout') }}" x-data>
             @csrf
             <x-jet-dropdown-link href="{{ route('logout') }}"
@@ -19,6 +23,13 @@
                 {{ __('Log Out') }}
             </x-jet-dropdown-link>
         </form>
+    @else
+         <a class="bg-gray-100" href="{{ route('login') }}">
+            <span class="">
+                お店オーナーの方はこちらから
+            </span>
+        </a>
+
     @endif
 </nav>
     
