@@ -12,7 +12,7 @@
                 <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="name">
                     お店の名前
                 </label>
-                <input id="name" name="name" class="form-control bg-gray-50 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-purple-500 focus:outline-none focus:shadow-outline" value="{{ $restaurant->name }}" type="text">
+                <input id="name" name="name" class="form-control bg-gray-50 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-blue-500 focus:outline-none focus:shadow-outline" value="{{ $restaurant->name }}" type="text">
                 @if ($errors->has('name'))
                     <div class="text-danger">
                         {{ $errors->first('name') }}
@@ -26,7 +26,7 @@
                 <textarea
                     id="description"
                     name="description"
-                    class="form-control bg-gray-50 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                    class="form-control bg-gray-50 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                     rows="4"
                 >{{ $restaurant->description }}</textarea>
                 @if ($errors->has('description'))
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="email">メールアドレス</label>
-                <input id="email" name="email" class="form-control bg-gray-50 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-purple-500 focus:outline-none focus:shadow-outline" value="{{ $restaurant->email }}" type="text">
+                <input id="email" name="email" class="form-control bg-gray-50 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-blue-500 focus:outline-none focus:shadow-outline" value="{{ $restaurant->email }}" type="text">
                 @if ($errors->has('email'))
                     <div class="text-danger">
                         {{ $errors->first('email') }}
@@ -47,13 +47,17 @@
             
             <div class="form-group">
                 <label for="image_id">画像登録</label>
-                <input type="file" name="image_id" id="image_id" class="form-control btn btn-primary">
+                <input type="file" name="image_id" id="image_id" class="form-control btn">
             </div>
             <div class="mt-5">
-                <a class="block shadow text-purple-400 hover:bg-purple-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" href="{{ route('restaurants') }}">
-                    キャンセル
-                </a>
-                <button class="block shadow text-purple-400 hover:bg-purple-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="submit">
+                <div>
+                    <a href="{{ route('restaurants') }}">
+                        <button class="block shadow text-orange-400 hover:bg-orange-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded">
+                            キャンセル
+                        </button>
+                    </a>
+                </div>
+                <button class="block shadow text-orange-400 hover:bg-orange-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="submit">
                     更新する
                 </button>
             </div>

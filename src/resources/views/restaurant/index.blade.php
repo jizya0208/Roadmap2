@@ -23,7 +23,7 @@
             @endif
           </div>
           <div>
-            <p class="mb-5">{{ $restaurant->description }}<p>
+            <p class="mb-5 tracking-widest text-sm text-amber-700">{{ $restaurant->description }}<p>
             <div class="avg-wrap mb-2">
               @if($restaurant->reviews->isNotEmpty())
                   <i class="fas fa-star"></i>

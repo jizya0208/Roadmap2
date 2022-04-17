@@ -10,6 +10,7 @@
             @if($restaurant->reviews->isNotEmpty())
                 @foreach ($restaurant->reviews as $review)
                     <div class="border-bottom border-secondary pt-2">
+                        <i class="fas fa-user"></i>
                         <p class="text-muted mx-3 pt-1">{{ $review->name }}
                             さんが{{ $review->created_at->format('Y年n月j日') }}に投稿</p>
                         <p class="text-muted mx-3">{!! nl2br(e($review->comment)) !!}</p>
@@ -22,7 +23,7 @@
         
         <div class="container mt-5">
             <h2>{{ $restaurant->name }}へのご意見をお聞かせください</h2>
-            <form method="POST" action="{{ route('restaurant.reviews.store', $restaurant) }}" onSubmit="return checkSubmit()">
+            <form method="POST" action="{{ route('form.send', $restaurant) }}" onSubmit="return checkSubmit()" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label class="block text-gray-500 font-bold  mb-1 md:mb-0 pr-4" for="name">
@@ -90,6 +91,11 @@
                         <option value="{{ $key }}">{{ $score }}</option>
                     @endforeach
                 </select>
+
+                <div class="form-group">
+                    <label class="mt-3 text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="image_id">画像の添付</label>
+                    <input type="file" name="image_id" id="image_id" class="form-control btn">
+                </div>
 
                 <div class="mt-5">
                     <button class="block shadow text-blue-400 hover:bg-blue-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="submit">

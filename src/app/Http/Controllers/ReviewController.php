@@ -3,14 +3,61 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Restaurant;
 use App\Models\Review;
 use App\Enums\Gender;
 use App\Enums\Age;
+use Session;
+use Validator;
 
 class ReviewController extends Controller
 {
+    private $formItems = ['name', 'email', 'comment', 'restaurant_id', 'gender', 'age', 'star', 'is_receivable'];
+	private $validator = [
+        'name' => 'required|max:255',
+        'comment' => 'required',
+	];
+
+    public function post(Request $request, $id)
+    {
+        $restaurant = Restaurant::find($id);
+        $input = $request->only($this->formItems);
+        $validator = Validator::make($input, $this->validator);
+        if($validator->fails()){
+            return redirect()->action("App\Http\Controllers\RestaurantController@show", $restaurant)
+                        ->withInput()
+                        ->withErrors($validator);
+        }
+        //セッションに書き込む
+        $request->session()->put("form_input", $input);
+        $request->file('image_id');
+        if($request->hasFile('image_id')) {
+            $file = $request['image_id'];
+            $formItems_image = [$file->getRealPath(), $file->getClientOriginalName()];
+            $request->session()->put("image_input", $formItems_image);
+        }
+        return redirect()->action("App\Http\Controllers\ReviewController@confirm", $restaurant);
+    }
+
+    public function confirm(Request $request, $id)
+    {
+        $restaurant = Restaurant::find($id);
+        $input = $request->session()->get("form_input");
+        $formItems_image =  $request->session()->get("image_input");
+        //セッションに値が無い時はフォームに戻る
+		if(!$input){
+			return redirect()->action("App\Http\Controllers\RestaurantController@show", $restaurant);
+		}
+		return view("review.confirm", ["input" => $input, "image_input" => $formItems_image]);
+    }
+
+    public function complete(){	
+		return view("form_complete");
+	}
+
+
     /**
-     * クチコミを投稿する
+     * レビューを投稿する
      * 
      * @return view
      */
@@ -39,9 +86,14 @@ class ReviewController extends Controller
         $review->gender = $request['gender'];
         $review->age = $request['age'];
         $review->star = $request['star'];
-
+        $image = $request->file('image_id');
         $review->is_receivable = $request['is_receivable'];
-
+        if($request->hasFile('image_id')) {
+            $path = \Storage::put('/public', $image); //アップロードしたパスが帰ってくる
+            $path = explode('/', $path);              //パスからファイル名だけを抽出
+        } else {
+            $path = null;
+        }
         $review->save();
         return redirect(route('restaurant.index'))->with('success', '正常に投稿されました');
     } 

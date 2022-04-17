@@ -6,7 +6,7 @@
     <div class="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 w-full mt-10 md:mt-0 relative z-10 shadow-md">
         <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">レストラン新規追加</h2>
         <form method="POST" action="{{ route('restaurant.store') }}" onSubmit="return checkSubmit()" enctype="multipart/form-data">
-            @csrf
+            @csrfvv
             <div class="form-group">
                 <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="name">
                     お店の名前

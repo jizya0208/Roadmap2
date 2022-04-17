@@ -19,7 +19,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::paginate(8);;
+        $restaurants = Restaurant::latest()->paginate(8);;
         return view('restaurant.index', ['restaurants' => $restaurants]);
     } 
 
@@ -72,7 +72,6 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::find($id);
         // $reviews = Review::find($restaurant->id);
-        // $reviews = Review::find($restaurant.id);
         //  selectタグに最適なkeyvalueペアのリストを返すメソッドが用意されている
         $gender = Gender::toSelectArray();
         $age = Age::toSelectArray();
@@ -92,10 +91,16 @@ class RestaurantController extends Controller
         if($request->hasFile('image_id')) {
             $path = \Storage::put('/public', $image); //アップロードしたパスが帰ってくる
             $path = explode('/', $path);              //パスからファイル名だけを抽出
+            $restaurant->fill([
+                'image_id' => $path[1],
+                'name' => $request->name,
+                'description' => $request->description,
+                'email' => $request->email
+                ])->save();
         } else {
             $path = null;
+            $restaurant->fill($data)->save();
         }
-        $restaurant->fill(['image_id' => $path[1]])->save();
         return redirect(route('restaurant.index'));
     }
 
@@ -104,4 +109,9 @@ class RestaurantController extends Controller
         $restaurant->delete();
         return redirect(route('restaurant.index'))->with('success','削除しました');
     } 
+
+    public function __construct()
+    {
+        // $this->authorizeResource(Restaurant::class, 'restaurant');
+    }
 }

@@ -19,6 +19,11 @@ use App\Http\Controllers\ReviewController;
 Route::get('/', 'App\Http\Controllers\RestaurantController@index')->name('restaurants');
 Route::resource('restaurant', RestaurantController::class);
 Route::resource('restaurant.reviews', ReviewController::class);
+Route::post('/restaurant/{restaurant}/form', 'App\Http\Controllers\ReviewController@post')->name("form.send");
+Route::get('/restaurant/{restaurant}/confirm', 'App\Http\Controllers\ReviewController@confirm')->name("form.confirm");
+Route::get('/form/thanks', 'App\Http\Controllers\ReviewController@complete"')->name("form.complete");
+
+
 Route::get('/admin/login', function () {
     return view('adminLogin'); // blade.php
 });
@@ -32,8 +37,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-
-//検索結果を表示する
 Route::get('/search', 'App\Http\Controllers\AdminDashboardController@search')->name('search');
 
 // Route::prefix('admin')->group(function () {

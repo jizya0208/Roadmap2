@@ -3,7 +3,7 @@
 @section('content')
 
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        管理者ダッシュボード
+        レビュー管理ページ
     </h2>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
