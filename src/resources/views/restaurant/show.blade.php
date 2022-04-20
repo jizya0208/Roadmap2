@@ -14,6 +14,9 @@
                         <p class="text-muted mx-3 pt-1">{{ $review->name }}
                             さんが{{ $review->created_at->format('Y年n月j日') }}に投稿</p>
                         <p class="text-muted mx-3">{!! nl2br(e($review->comment)) !!}</p>
+                        @if(!is_null($review->image_id)) 
+                            <img src="{{ asset('storage/' . $review->image_id) }}" alt="">
+                        @endif
                     </div>
                 @endforeach
             @else
