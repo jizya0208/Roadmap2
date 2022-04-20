@@ -51,13 +51,11 @@
             </div>
             <div class="mt-5">
                 <div>
-                    <a href="{{ route('restaurants') }}">
-                        <button class="block shadow text-orange-400 hover:bg-orange-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded">
-                            キャンセル
-                        </button>
+                    <a href="{{ route('restaurants') }}" class="inline-block shadow text-orange-400 hover:bg-orange-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded">
+                        キャンセル
                     </a>
                 </div>
-                <button class="block shadow text-orange-400 hover:bg-orange-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="submit">
+                <button class="block mt-5 shadow text-orange-400 hover:bg-orange-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="submit">
                     更新する
                 </button>
             </div>

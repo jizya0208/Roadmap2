@@ -13,6 +13,13 @@
         </div>
     </div>
 
+
+    <a class="nav-item nav-link active" href="{{ route('restaurant.index') }}">
+        <span class="sr-only">
+            <i class="nav-icon fas fa-home"></i>
+        </span>
+    </a>
+
     <!-- Authentication -->
     @if(Auth::check())
         <p>ようこそ{{ Auth::user()->name }}さん *{{ Auth::user()->id == $restaurant->id; }}</p>

@@ -93,12 +93,8 @@ class ReviewController extends Controller
             $review->age = $request['age'];
             $review->star = $request['star'];
             $review->is_receivable = $request['is_receivable'];
-            if($request->hasFile('image_id')) {
-                $path = \Storage::put('/public', $image); //アップロードしたパスが帰ってくる
-                $path = explode('/', $path);              //パスからファイル名だけを抽出
-                $review->image_id = $path[1];
-            } else {
-                $path = null;
+            if($request['image_id'] != 'no-image.png') {
+                $review->image_id = $request['image_id'];
             }
             $review->save();
             return redirect(route('form.complete'))->with('success', '正常に投稿されました');
