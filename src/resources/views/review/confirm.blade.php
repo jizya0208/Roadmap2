@@ -10,12 +10,12 @@
         <p>こちらの内容で投稿しますか？</p>
         <form method="POST" action="{{ route('restaurant.reviews.store', $restaurant) }}" onSubmit="return checkSubmit()" enctype="multipart/form-data">
             @csrf
-            <label class="block text-gray-500 font-bold  mb-1 md:mb-0 pr-4" for="name">お名前</label>
+            <label class="block mt-3 text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">お名前</label>
             {{ $input['name'] }}
             <input id="name" name="name" class="bg-gray-50 shadow appearance-none border rounded
               w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-blue-500 focus:outline-none focus:shadow-outline" value="{{ $input['name'] }}" type="hidden">
         
-            <label class="block text-gray-500 font-bold  mb-1 md:mb-0 pr-4" for="name">お問い合わせ内容</label>
+            <label class="block mt-3 text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">お問い合わせ内容</label>
               {{ $input['comment'] }}
             <input name="comment" value="{{ $input['comment'] }}" type="hidden">
 
@@ -46,8 +46,6 @@
                 <img src="{{ asset('storage/' . $formItems_image[2]) }}" alt="">
               @endif
             </div>
-
-            <input type="" id="image_id" name="image_id" value="{{ $formItems_image[2] }}">
 
             <div class="mt-5">
               <button class="block shadow text-blue-400 hover:bg-blue-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="submit" name="action" value="back">

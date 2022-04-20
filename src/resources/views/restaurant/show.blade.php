@@ -102,7 +102,7 @@
 
                 <div class="mt-5">
                     <button class="block shadow text-blue-400 hover:bg-blue-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="submit">
-                        投稿する
+                        確認画面へ進む
                     </button>
                 </div>
             </form>

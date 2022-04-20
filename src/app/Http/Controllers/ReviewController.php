@@ -64,6 +64,8 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+        $action = $request->get('action', 'back');
+        $input = $request->except('action');
         // バリデーションルールはvalidateメソッドへ渡される
         $validatedData = $request->validate([
             'name' => 'required|max:255',
@@ -78,25 +80,29 @@ class ReviewController extends Controller
         // }
         // 戻り値は挿入されたレコードの情報
         // $result = Review::create($request->all());
-
-        $review = new Review();
-        $review->name = $request['name'];
-        $review->email = $request['email'];
-        $review->comment = $request['comment'];
-        $review->restaurant_id = $request['restaurant_id'];
-        $review->gender = $request['gender'];
-        $review->age = $request['age'];
-        $review->star = $request['star'];
-        $review->is_receivable = $request['is_receivable'];
-        if($request->hasFile('image_id')) {
-            $path = \Storage::put('/public', $image); //アップロードしたパスが帰ってくる
-            $path = explode('/', $path);              //パスからファイル名だけを抽出
-            $review->image_id = $path[1];
+        if($action == 'back'){
+             return redirect()->action("App\Http\Controllers\RestaurantController@show", $request['restaurant_id'])
+        ->withInput($input);
         } else {
-            $path = null;
+            $review = new Review();
+            $review->name = $request['name'];
+            $review->email = $request['email'];
+            $review->comment = $request['comment'];
+            $review->restaurant_id = $request['restaurant_id'];
+            $review->gender = $request['gender'];
+            $review->age = $request['age'];
+            $review->star = $request['star'];
+            $review->is_receivable = $request['is_receivable'];
+            if($request->hasFile('image_id')) {
+                $path = \Storage::put('/public', $image); //アップロードしたパスが帰ってくる
+                $path = explode('/', $path);              //パスからファイル名だけを抽出
+                $review->image_id = $path[1];
+            } else {
+                $path = null;
+            }
+            $review->save();
+            return redirect(route('form.complete'))->with('success', '正常に投稿されました');
         }
-        $review->save();
-        return redirect(route('form.complete'))->with('success', '正常に投稿されました');
     } 
 
     public function show($id)
