@@ -15,13 +15,12 @@ use App\Http\Controllers\ReviewController;
 |
 */
 
-// レストラン一覧画面を表示
-Route::get('/', 'App\Http\Controllers\RestaurantController@index')->name('restaurants');
+Route::get('/', 'App\Http\Controllers\RestaurantController@index')->name('restaurants'); // レストラン一覧画面を表示
 Route::resource('restaurant', RestaurantController::class);
 Route::resource('restaurant.reviews', ReviewController::class);
 Route::post('/restaurant/{restaurant}/form', 'App\Http\Controllers\ReviewController@post')->name("form.send");
 Route::get('/restaurant/{restaurant}/confirm', 'App\Http\Controllers\ReviewController@confirm')->name("form.confirm");
-Route::get('/form/thanks', 'App\Http\Controllers\ReviewController@complete"')->name("form.complete");
+Route::get('/thanks', 'App\Http\Controllers\ReviewController@complete')->name("form.complete");
 
 
 Route::get('/admin/login', function () {

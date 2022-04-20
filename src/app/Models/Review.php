@@ -27,5 +27,6 @@ class Review extends Model
         'age',
         'star',
         'is_receivable',
+        'image_id',
     ];
 }

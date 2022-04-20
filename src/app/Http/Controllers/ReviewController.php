@@ -30,10 +30,11 @@ class ReviewController extends Controller
         }
         //セッションに書き込む
         $request->session()->put("form_input", $input);
-        $request->file('image_id');
         if($request->hasFile('image_id')) {
-            $file = $request['image_id'];
-            $formItems_image = [$file->getRealPath(), $file->getClientOriginalName()];
+            $file = $request->file('image_id');
+            $path = \Storage::put('/public', $file); //アップロードしたパスが帰ってくる
+            $path = explode('/', $path); 
+            $formItems_image = [$file->getRealPath(), $file->getClientOriginalName(), $path[1]];
             $request->session()->put("image_input", $formItems_image);
         }
         return redirect()->action("App\Http\Controllers\ReviewController@confirm", $restaurant);
@@ -48,11 +49,11 @@ class ReviewController extends Controller
 		if(!$input){
 			return redirect()->action("App\Http\Controllers\RestaurantController@show", $restaurant);
 		}
-		return view("review.confirm", ["input" => $input, "image_input" => $formItems_image]);
+		return view("review.confirm", compact('input', 'formItems_image', 'restaurant'));
     }
 
     public function complete(){	
-		return view("form_complete");
+		return view('review.thanks');
 	}
 
 
@@ -86,16 +87,16 @@ class ReviewController extends Controller
         $review->gender = $request['gender'];
         $review->age = $request['age'];
         $review->star = $request['star'];
-        $image = $request->file('image_id');
         $review->is_receivable = $request['is_receivable'];
         if($request->hasFile('image_id')) {
             $path = \Storage::put('/public', $image); //アップロードしたパスが帰ってくる
             $path = explode('/', $path);              //パスからファイル名だけを抽出
+            $review->image_id = $path[1];
         } else {
             $path = null;
         }
         $review->save();
-        return redirect(route('restaurant.index'))->with('success', '正常に投稿されました');
+        return redirect(route('form.complete'))->with('success', '正常に投稿されました');
     } 
 
     public function show($id)
