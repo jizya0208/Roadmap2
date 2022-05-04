@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.0.23 | MIT License | https://tailwindcss.com
+! tailwindcss v3.0.24 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -1016,6 +1016,10 @@ select {
   margin-left: auto;
   margin-right: auto;
 }
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
 .mx-3 {
   margin-left: 0.75rem;
   margin-right: 0.75rem;
@@ -1361,9 +1365,6 @@ select {
 .border-2 {
   border-width: 2px;
 }
-.border-4 {
-  border-width: 4px;
-}
 .border-b-2 {
   border-bottom-width: 2px;
 }
@@ -1378,9 +1379,6 @@ select {
 }
 .border-r {
   border-right-width: 1px;
-}
-.border-double {
-  border-style: double;
 }
 .border-gray-300 {
   --tw-border-opacity: 1;
@@ -1408,10 +1406,6 @@ select {
 .border-gray-700 {
   --tw-border-opacity: 1;
   border-color: rgb(55 65 81 / var(--tw-border-opacity));
-}
-.border-indigo-600 {
-  --tw-border-opacity: 1;
-  border-color: rgb(79 70 229 / var(--tw-border-opacity));
 }
 .border-gray-400 {
   --tw-border-opacity: 1;
@@ -1472,10 +1466,6 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
-.bg-blue-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-}
 .bg-slate-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
@@ -1483,6 +1473,10 @@ select {
 .bg-amber-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(253 230 138 / var(--tw-bg-opacity));
+}
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
@@ -1508,9 +1502,6 @@ select {
 }
 .p-8 {
   padding: 2rem;
-}
-.p-3 {
-  padding: 0.75rem;
 }
 .px-4 {
   padding-left: 1rem;
@@ -1606,6 +1597,9 @@ select {
 .pb-1 {
   padding-bottom: 0.25rem;
 }
+.pb-20 {
+  padding-bottom: 5rem;
+}
 .pt-8 {
   padding-top: 2rem;
 }
@@ -1647,10 +1641,6 @@ select {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
 }
 .font-medium {
   font-weight: 500;
@@ -1742,17 +1732,21 @@ select {
   --tw-text-opacity: 1;
   color: rgb(34 197 94 / var(--tw-text-opacity));
 }
+.text-amber-700 {
+  --tw-text-opacity: 1;
+  color: rgb(180 83 9 / var(--tw-text-opacity));
+}
 .text-orange-700 {
   --tw-text-opacity: 1;
   color: rgb(194 65 12 / var(--tw-text-opacity));
 }
-.text-orange-400 {
-  --tw-text-opacity: 1;
-  color: rgb(251 146 60 / var(--tw-text-opacity));
-}
 .text-blue-400 {
   --tw-text-opacity: 1;
   color: rgb(96 165 250 / var(--tw-text-opacity));
+}
+.text-orange-400 {
+  --tw-text-opacity: 1;
+  color: rgb(251 146 60 / var(--tw-text-opacity));
 }
 .text-gray-200 {
   --tw-text-opacity: 1;
@@ -1761,14 +1755,6 @@ select {
 .text-gray-300 {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-.text-purple-400 {
-  --tw-text-opacity: 1;
-  color: rgb(192 132 252 / var(--tw-text-opacity));
-}
-.text-amber-700 {
-  --tw-text-opacity: 1;
-  color: rgb(180 83 9 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;
@@ -1868,43 +1854,114 @@ select {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 h2 {
-  border-bottom: solid 3px skyblue;
-  position: relative;
-  letter-spacing: 0.06em;
-  font-size: 1.6em;
-  line-height: 2.2;
-  font-weight: 600;
-  font-family: Courier, Chalkduster, "Bradley Hand", "Segoe Print", sans-serif;
+    border-bottom: solid 3px skyblue;
+    position: relative;
+    letter-spacing: 0.06em;
+    font-size: 1.6em;
+    line-height: 2.2;
+    font-weight: 600;
+    font-family: Courier, Chalkduster, "Bradley Hand", "Segoe Print", sans-serif;
 }
 h2:after {
-  position: absolute;
-  content: " ";
-  display: block;
-  border-bottom: solid 3px #ff7a45;
-  bottom: -3px;
-  width: 30%;
+    position: absolute;
+    content: " ";
+    display: block;
+    border-bottom: solid 3px #ff7a45;
+    bottom: -3px;
+    width: 30%;
 }
 .heading {
-  margin-top: 50px;
-  font-weight: 600;
-  font-size: 1.4em;
-  line-height: 1.8;
-  letter-spacing: 0.05em;
+    margin-top: 50px;
+    font-weight: 600;
+    font-size: 1.4em;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
 }
 .thumb {
-  width: auto;
-  height: 300px;
-  margin: 0 auto;
+    width: auto;
+    height: 300px;
+    margin: 0 auto;
 }
 .thumb > img {
-  width: auto;
-  height: 100%;
+    width: auto;
+    height: 100%;
 }
 .avg-wrap {
-font-size: 1.2em;
+    font-size: 1.2em;
 }
 .avg-wrap > i {
-color: #ff7a45;
+    color: #ff7a45;
+}
+.star-rating {
+    position: relative;
+    font-size: 28px;
+}
+.star-rating::before,
+.star-rating::after {
+    content: "★★★★★";
+    color: #e1e1e1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.star-rating::after {
+    color: #ff7a45;
+    overflow: hidden;
+}
+.star-rating[data-rate="1"]::after {
+    width: 28px;
+}
+.star-rating[data-rate="2"]::after {
+    width: 56px;
+}
+.star-rating[data-rate="3"]::after {
+    width: 84px;
+}
+.star-rating[data-rate="4"]::after {
+    width: 114px;
+}
+.star-rating[data-rate="5"]::after {
+    width: 142px;
+}
+/* 吹き出し本体 */
+.balloon{
+    position: relative;
+    padding: 20px;
+    background-color: #f3f3f3;
+    color: black;
+    border-radius: 10px;
+}
+/* 色付きの半円 */
+.balloon::before{
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    transform: rotate(45deg);
+    left: 20px;
+    top: -15px;
+    border-left: 20px solid #f3f3f3;
+    border-top: 20px solid #f3f3f3;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+}
+/* 白い半円 */
+.balloon::after{
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    transform: rotate(45deg);
+    left: 35px;
+    top: -20px;
+    border-left: 20px solid #ffffff;
+    border-top: 20px solid #ffffff;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid transparent;
 }
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;
@@ -1945,21 +2002,17 @@ color: #ff7a45;
   --tw-bg-opacity: 1;
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
-.hover\:bg-orange-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(251 146 60 / var(--tw-bg-opacity));
-}
 .hover\:bg-blue-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(96 165 250 / var(--tw-bg-opacity));
 }
+.hover\:bg-orange-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 146 60 / var(--tw-bg-opacity));
+}
 .hover\:bg-blue-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
-}
-.hover\:bg-purple-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(192 132 252 / var(--tw-bg-opacity));
 }
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
@@ -2020,10 +2073,6 @@ color: #ff7a45;
 .focus\:border-blue-500:focus {
   --tw-border-opacity: 1;
   border-color: rgb(59 130 246 / var(--tw-border-opacity));
-}
-.focus\:border-purple-500:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(168 85 247 / var(--tw-border-opacity));
 }
 .focus\:bg-indigo-600:focus {
   --tw-bg-opacity: 1;
@@ -2426,5 +2475,3 @@ color: #ff7a45;
     padding-right: 2rem;
   }
 }
-
-

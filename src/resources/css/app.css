@@ -3,48 +3,123 @@
 @import "tailwindcss/utilities";
 
 h2 {
-  border-bottom: solid 3px skyblue;
-  position: relative;
-  letter-spacing: 0.06em;
-  font-size: 1.6em;
-  line-height: 2.2;
-  font-weight: 600;
-  font-family: Courier, Chalkduster, "Bradley Hand", "Segoe Print", sans-serif;
+    border-bottom: solid 3px skyblue;
+    position: relative;
+    letter-spacing: 0.06em;
+    font-size: 1.6em;
+    line-height: 2.2;
+    font-weight: 600;
+    font-family: Courier, Chalkduster, "Bradley Hand", "Segoe Print", sans-serif;
 }
 
 h2:after {
-  position: absolute;
-  content: " ";
-  display: block;
-  border-bottom: solid 3px #ff7a45;
-  bottom: -3px;
-  width: 30%;
+    position: absolute;
+    content: " ";
+    display: block;
+    border-bottom: solid 3px #ff7a45;
+    bottom: -3px;
+    width: 30%;
 }
 
 .heading {
-  margin-top: 50px;
-  font-weight: 600;
-  font-size: 1.4em;
-  line-height: 1.8;
-  letter-spacing: 0.05em;
+    margin-top: 50px;
+    font-weight: 600;
+    font-size: 1.4em;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
 }
 
 .thumb {
-  width: auto;
-  height: 300px;
-  margin: 0 auto;
+    width: auto;
+    height: 300px;
+    margin: 0 auto;
 }
 
 .thumb > img {
-  width: auto;
-  height: 100%;
+    width: auto;
+    height: 100%;
 }
 
 .avg-wrap {
-font-size: 1.2em;
+    font-size: 1.2em;
 }
 
 .avg-wrap > i {
-color: #ff7a45;
+    color: #ff7a45;
 }
 
+.star-rating {
+    position: relative;
+    font-size: 28px;
+}
+
+.star-rating::before,
+.star-rating::after {
+    content: "★★★★★";
+    color: #e1e1e1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.star-rating::after {
+    color: #ff7a45;
+    overflow: hidden;
+}
+
+.star-rating[data-rate="1"]::after {
+    width: 28px;
+}
+.star-rating[data-rate="2"]::after {
+    width: 56px;
+}
+.star-rating[data-rate="3"]::after {
+    width: 84px;
+}
+.star-rating[data-rate="4"]::after {
+    width: 114px;
+}
+.star-rating[data-rate="5"]::after {
+    width: 142px;
+}
+
+/* 吹き出し本体 */
+.balloon{
+    position: relative;
+    padding: 20px;
+    background-color: #f3f3f3;
+    color: black;
+    border-radius: 10px;
+}
+/* 色付きの半円 */
+.balloon::before{
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    transform: rotate(45deg);
+    left: 20px;
+    top: -15px;
+    border-left: 20px solid #f3f3f3;
+    border-top: 20px solid #f3f3f3;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+}
+/* 白い半円 */
+.balloon::after{
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    transform: rotate(45deg);
+    left: 35px;
+    top: -20px;
+    border-left: 20px solid #ffffff;
+    border-top: 20px solid #ffffff;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+}

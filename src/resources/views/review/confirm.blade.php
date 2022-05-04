@@ -44,16 +44,15 @@
             @if(!is_null($formItems_image)) 
               <div class="thumb mb-5">
                 <img src="{{ asset('storage/' . $formItems_image[2]) }}" alt="">
-                <input type="" id="image_id" name="image_id" value="{{ $formItems_image[2] }}">
+                <input type="hidden" id="image_id" name="image_id" value="{{ $formItems_image[2] }}">
               </div>
             @endif
-
 
             <div class="mt-5">
               <button class="block shadow text-blue-400 hover:bg-blue-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="submit" name="action" value="back">
                   入力内容修正
               </button>
-              <button class="block shadow text-blue-400 hover:bg-blue-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="submit">
+              <button class="block shadow text-blue-400 hover:bg-blue-400 focus:shadow-outline focus:outline-none hover:text-white font-bold py-2 px-4 rounded" type="submit" name="action" value="submit">
                   投稿する
               </button>
             </div>

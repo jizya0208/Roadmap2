@@ -31,6 +31,7 @@ class RestaurantFactory extends Factory
             'name' =>  $this->faker->company,
             'address' => $this->faker->address,
             'description' => $this->faker->text,
+            'image_id' => 'no-image.png',
             'email' => $this->faker->safeEmail,
             'password' => $this->faker->password,
         ];
