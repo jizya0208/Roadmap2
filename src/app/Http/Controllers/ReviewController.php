@@ -33,9 +33,11 @@ class ReviewController extends Controller
         if($request->hasFile('image_id')) {
             $file = $request->file('image_id');
             $path = Storage::disk('s3')->putFile('/', $file); // S3バケットへアップロードする
-            $full_path = Storage::disk('s3')->url($path);
+            $url = Storage::disk('s3')->url($path);
             $formItems_image = [$file->getRealPath(), $file->getClientOriginalName(), $full_path];
             $request->session()->put("image_input", $formItems_image);
+            //job_photo_urlという名前で$urlをsessionに保存
+            $request->session()->put('review_image_url', $url);
         }
         return redirect()->action("App\Http\Controllers\ReviewController@confirm", $restaurant);
     }
@@ -44,7 +46,7 @@ class ReviewController extends Controller
     {
         $restaurant = Restaurant::find($id);
         $input = $request->session()->get("form_input");
-        $formItems_image =  $request->session()->get("image_input");
+        $formItems_image =  $request->session()->get("review_image_url");
         //セッションに値が無い時はフォームに戻る
 		if(!$input){
 			return redirect()->action("App\Http\Controllers\RestaurantController@show", $restaurant);
@@ -86,6 +88,8 @@ class ReviewController extends Controller
              return redirect()->action("App\Http\Controllers\RestaurantController@show", $request['restaurant_id'])
         ->withInput($input);
         } else {
+            $fileUrl = Session::get('job_photo_url');
+            $job = $request->session()->get('job');
             $review = new Review();
             $review->name = $request['name'];
             $review->email = $request['email'];
