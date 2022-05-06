@@ -33,7 +33,8 @@ class ReviewController extends Controller
         if($request->hasFile('image_id')) {
             $file = $request->file('image_id');
             $path = Storage::disk('s3')->putFile('/', $file); // S3バケットへアップロードする
-            $formItems_image = [$file->getRealPath(), $file->getClientOriginalName(), $path];
+            $full_path = Storage::disk('s3')->url($path);
+            $formItems_image = [$file->getRealPath(), $file->getClientOriginalName(), $full_path];
             $request->session()->put("image_input", $formItems_image);
         }
         return redirect()->action("App\Http\Controllers\ReviewController@confirm", $restaurant);

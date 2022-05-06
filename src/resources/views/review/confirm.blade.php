@@ -43,7 +43,7 @@
             
             @if(!is_null($formItems_image)) 
               <div class="thumb mb-5">
-                <img src="{{ asset('storage/' . $formItems_image[2]) }}" alt="">
+                <img src="{{ $formItems_image[2] }}" alt="">
                 <input type="hidden" id="image_id" name="image_id" value="{{ $formItems_image[2] }}">
               </div>
             @endif
