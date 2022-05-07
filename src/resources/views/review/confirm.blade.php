@@ -43,8 +43,8 @@
             
             @if(!is_null($formItems_image)) 
               <div class="thumb mb-5">
-                <img src="{{ $formItems_image[2] }}" alt="">
-                <input type="hidden" id="image_id" name="image_id" value="{{ $formItems_image[2] }}">
+                <img src="{{ $formItems_image }}" alt="">
+                <input type="hidden" id="image_id" name="image_id" value="{{ $formItems_image }}">
               </div>
             @endif
 
