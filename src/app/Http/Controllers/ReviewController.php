@@ -9,6 +9,7 @@ use App\Enums\Gender;
 use App\Enums\Age;
 use Session;
 use Validator;
+use Storage;
 
 class ReviewController extends Controller
 {
@@ -33,12 +34,10 @@ class ReviewController extends Controller
         if($request->hasFile('image_id')) {
             $file = $request->file('image_id');
             $path = Storage::disk('s3')->putFile('/', $file); // S3バケットへアップロードする
-            $url = Storage::disk('s3')->url($path);
-            dd($url);
-            $formItems_image = [$file->getRealPath(), $file->getClientOriginalName(), $full_path];
+            $formItems_image = [$file->getRealPath(), $file->getClientOriginalName(), $path];
             $request->session()->put("image_input", $formItems_image);
-            //job_photo_urlという名前で$urlをsessionに保存
-            $request->session()->put('review_image_url', $url);
+            //review_image_urlという名前で$urlをsessionに保存
+            $request->session()->put('review_image_url', $path);
         }
         return redirect()->action("App\Http\Controllers\ReviewController@confirm", $restaurant);
     }
