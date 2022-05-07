@@ -88,8 +88,6 @@ class ReviewController extends Controller
              return redirect()->action("App\Http\Controllers\RestaurantController@show", $request['restaurant_id'])
         ->withInput($input);
         } else {
-            $fileUrl = Session::get('job_photo_url');
-            $job = $request->session()->get('job');
             $review = new Review();
             $review->name = $request['name'];
             $review->email = $request['email'];
@@ -100,7 +98,8 @@ class ReviewController extends Controller
             $review->star = $request['star'];
             $review->is_receivable = $request['is_receivable'];
             if($request['image_id'] != 'no-image.png') {
-                $review->image_id = $request['image_id'];
+                $path = $request->session()->get('review_image_url');
+                $review->image_id = Storage::disk('s3')->url($path);
             }
             $review->save();
             return redirect(route('form.complete'))->with('success', '正常に投稿されました');
