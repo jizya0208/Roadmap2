@@ -17,7 +17,7 @@
                         <span class="star-rating" data-rate="{{ $review->star }}"></span>
                         <div class="text-muted mx-3 balloon my-5">{!! nl2br(e($review->comment)) !!}</div>
                         @if($review->image_id != "no-image.png") 
-                            <img src="{{ $review->image_id) }}" alt="" class="thumb py-2">
+                            <img src="{{ $review->image_id }}" alt="" class="thumb py-2">
                         @endif
                     </div>
                 @endforeach

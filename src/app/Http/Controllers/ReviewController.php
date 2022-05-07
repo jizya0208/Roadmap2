@@ -34,6 +34,7 @@ class ReviewController extends Controller
             $file = $request->file('image_id');
             $path = Storage::disk('s3')->putFile('/', $file); // S3バケットへアップロードする
             $url = Storage::disk('s3')->url($path);
+            dd($url);
             $formItems_image = [$file->getRealPath(), $file->getClientOriginalName(), $full_path];
             $request->session()->put("image_input", $formItems_image);
             //job_photo_urlという名前で$urlをsessionに保存
