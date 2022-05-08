@@ -8,6 +8,7 @@ use App\Models\Restaurant;
 use App\Models\Review;
 use App\Enums\Gender;
 use App\Enums\Age;
+use Storage;
 
 
 class RestaurantController extends Controller
@@ -36,8 +37,8 @@ class RestaurantController extends Controller
         $image = $request->file('image_id');
         // 画像がアップロードされていればstorageに保存
         if($request->hasFile('image_id')) {
-            $path = \Storage::put('/public', $image); //アップロードしたパスが帰ってくる
-            $path = explode('/', $path);              //パスからファイル名だけを抽出
+            $file = $request->file('image_id');
+            $path = Storage::disk('s3')->putFile('/', $file); // S3バケットへアップロードする
         } else {
             $path = null;
         }
@@ -65,7 +66,7 @@ class RestaurantController extends Controller
         // 戻り値は挿入されたレコードの情報
         $result = Restaurant::create($request->all());
         // ルーティング「todo.index」にリクエスト送信（一覧ページに移動）
-        return redirect()->route('restaurant.index');
+        return redirect(route('restaurants'));
     } 
 
     public function show($id)
@@ -89,10 +90,10 @@ class RestaurantController extends Controller
         $image = $request->file('image_id');
         // 画像がアップロードされていればstorageに保存
         if($request->hasFile('image_id')) {
-            $path = \Storage::put('/public', $image); //アップロードしたパスが帰ってくる
-            $path = explode('/', $path);              //パスからファイル名だけを抽出
+            $file = $request->file('image_id');
+            $path = Storage::disk('s3')->putFile('/', $file); // S3バケットへアップロードする
             $restaurant->fill([
-                'image_id' => $path[1],
+                'image_id' => $path,
                 'name' => $request->name,
                 'description' => $request->description,
                 'email' => $request->email
@@ -101,13 +102,13 @@ class RestaurantController extends Controller
             $path = null;
             $restaurant->fill($data)->save();
         }
-        return redirect(route('restaurant.index'));
+        return redirect(route('restaurants'));
     }
 
     public function destroy(Restaurant $restaurant)
     {
         $restaurant->delete();
-        return redirect(route('restaurant.index'))->with('success','削除しました');
+        return redirect(route('restaurants'))->with('success','削除しました');
     } 
 
     public function __construct()

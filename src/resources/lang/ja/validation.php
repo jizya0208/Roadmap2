@@ -134,8 +134,11 @@ return [
         ],
     ],
     'attributes' => [
-        'name' => 'お店の名前',
+        'name' => '名前',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'comment' => 'コメント',
+        'age' => '年代',
+        'gender' => '性別',
     ],
 ];

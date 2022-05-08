@@ -17,6 +17,9 @@ class ReviewController extends Controller
 	private $validator = [
         'name' => 'required|max:255',
         'comment' => 'required',
+        'gender' => 'required',
+        'age' => 'required',
+        'email' => 'required',
 	];
 
     public function post(Request $request, $id)
@@ -48,7 +51,7 @@ class ReviewController extends Controller
 		if(!$input){
 			return redirect()->action("App\Http\Controllers\RestaurantController@show", $restaurant);
 		} elseif(!$fullpath) {
-            return view("review.confirm", compact('input', 'restaurant'));
+            return view("review.confirm", compact('input', 'fullpath', 'restaurant'));
         }
 		return view("review.confirm", compact('input', 'fullpath', 'restaurant'));
     }
@@ -94,7 +97,7 @@ class ReviewController extends Controller
             $review->age = $request['age'];
             $review->star = $request['star'];
             $review->is_receivable = $request['is_receivable'];
-            if($request['image_id'] != 'no-image.png') {
+            if($request['image_id']) {
                 $path = $request->session()->get('review_image_url');
                 $review->image_id = Storage::disk('s3')->url($path);
             }

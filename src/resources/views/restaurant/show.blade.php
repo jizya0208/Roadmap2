@@ -37,7 +37,7 @@
                     <input id="name" name="name" class="bg-gray-50 shadow appearance-none border rounded
                     w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-blue-500 focus:outline-none focus:shadow-outline" value="{{ old('name') }}" type="text">
                     @if ($errors->has('name'))
-                        <div class="text-danger">
+                        <div class="text-red-400 text-xs">
                             {{ $errors->first('name') }}
                         </div>
                     @endif
@@ -48,7 +48,7 @@
                     </label>
                     <textarea id="comment" name="comment" class="form-control bg-gray-50 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" rows="4">{{ old('comment') }}</textarea>
                     @if ($errors->has('comment'))
-                        <div class="text-danger">
+                        <div class="text-red-400 text-xs">
                             {{ $errors->first('comment') }}
                         </div>
                     @endif
@@ -57,42 +57,46 @@
                 <div class="block mt-4 text-gray-500 font-bold  mb-1 md:mb-0 pr-4">性別</div>
                 <div class="flex">
                     <div class="form-check">
-                        <input type="radio" name="gender" class="form-check-input" id="male" value="男性" {{ old ('gender', "男性") == 1 ? 'checked' : '' }}>
+                        <input type="radio" name="gender" class="form-check-input" id="male" value=1 {{ old ('gender') == "男性" ? 'checked' : '' }}>
                         <label class="mb-1 md:mb-0 pr-4" for="male">男性</label>
                         <!-- oldヘルパー バリデーションのエラー時に、値を保持しておきたい項目のvalue属性に「name属性の値」と同じ引数を渡して設定。 -->
                     </div>
                     <div class="form-check">
-                        <input type="radio" name="gender" class="form-check-input" id="female" value="女性" {{ old ('gender') == '女性' ? 'checked' : '' }}>
+                        <input type="radio" name="gender" class="form-check-input" id="female" value=2 {{ old ('gender') == '女性' ? 'checked' : '' }}>
                         <label class="mb-1 md:mb-0 pr-4" for="female">女性</label>
                     </div>
                     <div class="form-check">
-                        <input type="radio" name="gender" class="form-check-input" id="another" value="その他" {{ old ('gender') == 'その他' ? 'checked' : '' }}>
+                        <input type="radio" name="gender" class="form-check-input" id="another" value=3 {{ old ('gender') == 'その他' ? 'checked' : '' }}>
                         <label class="mb-1 md:mb-0 pr-4" for="another">その他</label>
                     </div>
                     <div class="form-check">
-                        <input type="radio" name="gender" class="form-check-input" id="no-answer" value="解答しない" {{ old ('gender') == '解答しない' ? 'checked' : '' }}>
+                        <input type="radio" name="gender" class="form-check-input" id="no-answer" value=4 {{ old ('gender') == '解答しない' ? 'checked' : '' }}>
                         <label class="mb-1 md:mb-0 pr-4" for="no-answer">解答しない</label>
                     </div>
-                    @error('gender')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                    @if ($errors->has('gender'))
+                        <div class="text-red-400 text-xs">
+                            {{ $errors->first('gender') }}
+                        </div>
+                    @endif
                 </div>
                 <label class="mt-4 block text-gray-500 font-bold  mb-1 md:mb-0 pr-4" for="age">年代</label>
                 <select name="age" class="form-control w-full">
                     <option value="">▼ 以下から選択</option>
                     @foreach($age as $key => $value)
-                        <option value="{{$key}}">{{ $value }}</option>
+                        <option value="{{ $key + 1 }}">{{ $value }}</option>
                     @endforeach
                 </select>
-                @error('age')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
+                @if ($errors->has('gender'))
+                    <div class="text-red-400 text-xs">
+                        {{ $errors->first('age') }}
+                    </div>
+                @endif
 
                 <div class="form-group">
                     <label class="mt-4 block text-gray-500 font-bold  mb-1 md:mb-0 pr-4" for="email">メールアドレス</label>
                     <input id="email" name="email" class="form-control bg-gray-50 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-blue-500 focus:outline-none focus:shadow-outline" value="{{ old('email') }}" type="text">
                     @if ($errors->has('email'))
-                        <div class="text-danger">
+                        <div class="text-red-400 text-xs">
                             {{ $errors->first('email') }}
                         </div>
                     @endif

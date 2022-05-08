@@ -15,11 +15,11 @@
           {{ $restaurant->name }}
         </h3>
         <div class="grid-cols-1 grid md:grid-cols-2 md:gap-5">
-          <div class=" mb-5">
+          <div class="restaurant_thumb mb-5">
             @if($restaurant->image_id == "no-image.png")
               <img src="{{ asset('no-image.png')}}" alt="">
             @else
-              <img src="{{ asset('storage/' . $restaurant->image_id) }}" alt="">
+              <img src="{{ Storage::disk('s3')->url($restaurant->image_id) }}" alt="">
             @endif
           </div>
           <div>

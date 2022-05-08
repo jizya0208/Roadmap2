@@ -13,7 +13,7 @@ class AdminDashboardController extends Controller
     {
         $age = Age::toSelectArray();
         $gender = Gender::toSelectArray();
-        $reviews = Review::get();
+        $reviews = Review::paginate(10);
         //日付が選択されたら
         if (!empty($request['from']) && !empty($request['until'])) {
             //ハッシュタグの選択された20xx/xx/xx ~ 20xx/xx/xxのレポート情報を取得
@@ -43,10 +43,10 @@ class AdminDashboardController extends Controller
             $query->where('name', 'LIKE', "%{$keyword_name}%");
         }
         if(!empty($keyword_age)) {
-            $query->where('age', "%{$keyword_age}%");
+            $query->where('age', $keyword_age);
         }
         if(!empty($keyword_gender)) {
-            $query->where('gender', "%{$keyword_gender}%");
+            $query->where('gender', $keyword_gender);
         }
         if($keyword_is_receivable == "1") {
             $query->where('is_receivable', "1");
@@ -56,7 +56,7 @@ class AdminDashboardController extends Controller
         if (!empty($from) && !empty($to)) {
             $query->whereBetween('created_at', [$from, $to]);
         } 
-        $reviews = $query->get();
+        $reviews = $query->paginate(10);;
         return view('admin.dashboard', compact('reviews', 'age', 'gender'));
     }
 }

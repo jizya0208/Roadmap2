@@ -22,11 +22,11 @@
             <input value="{{ $restaurant->id }}" type="hidden" name="restaurant_id" />
 
             <label class="block mt-3 text-gray-500 font-bold  mb-1 md:mb-0 pr-4" for="gender">性別</label>
-            <p>{{\App\Enums\Gender::getDescription($input['gender'])}}</p>
+            <p>{{\App\Enums\Gender::getDescription($input['gender'] - 1)}}</p>
             <input name="gender" value="{{ $input['gender'] }}" type="hidden">
 
             <label class="mt-3 block text-gray-500 font-bold  mb-1 md:mb-0 pr-4" for="age">年代</label>
-            <p>{{\App\Enums\Age::getDescription($input['age'])}}</p>
+            <p>{{\App\Enums\Age::getDescription($input['age'] - 1)}}</p>
             <input name="age" value="{{ $input['age'] }}" type="hidden">
 
             <label class="mt-3 block text-gray-500 font-bold  mb-1 md:mb-0 pr-4" for="email">メールアドレス</label>
@@ -41,7 +41,7 @@
             {{ $input['star'] }}
             <input id="star" name="star" class="form-control bg-gray-50 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-blue-500 focus:outline-none focus:shadow-outline" value="{{ $input['star'] }}" type="hidden">
             
-            @if(!is_null($fullpath)) 
+            @if($fullpath) 
               <div class="thumb mb-5">
                 <img src="{{ Storage::disk('s3')->url($fullpath) }}" alt="">
                 <input type="hidden" id="image_id" name="image_id" value="{{ $fullpath }}">

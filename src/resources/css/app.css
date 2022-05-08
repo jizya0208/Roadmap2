@@ -123,3 +123,11 @@ h2:after {
     border-right: 20px solid transparent;
     border-bottom: 20px solid transparent;
 }
+
+.restaurant_thumb img{
+    display: block;
+    height: 240px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 5%;
+}

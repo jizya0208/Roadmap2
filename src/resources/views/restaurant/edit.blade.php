@@ -9,12 +9,12 @@
             @method('PATCH')    
             @csrf
             <div class="form-group">
-                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="name">
+                <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">
                     お店の名前
                 </label>
                 <input id="name" name="name" class="form-control bg-gray-50 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-blue-500 focus:outline-none focus:shadow-outline" value="{{ $restaurant->name }}" type="text">
                 @if ($errors->has('name'))
-                    <div class="text-danger">
+                    <div class="text-red-400">
                         {{ $errors->first('name') }}
                     </div>
                 @endif
@@ -30,16 +30,16 @@
                     rows="4"
                 >{{ $restaurant->description }}</textarea>
                 @if ($errors->has('description'))
-                    <div class="text-danger">
+                    <div class="text-red-400">
                         {{ $errors->first('description') }}
                     </div>
                 @endif
             </div>
             <div class="form-group">
-                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="email">メールアドレス</label>
+                <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="email">メールアドレス</label>
                 <input id="email" name="email" class="form-control bg-gray-50 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-blue-500 focus:outline-none focus:shadow-outline" value="{{ $restaurant->email }}" type="text">
                 @if ($errors->has('email'))
-                    <div class="text-danger">
+                    <div class="text-red-400">
                         {{ $errors->first('email') }}
                     </div>
                 @endif
