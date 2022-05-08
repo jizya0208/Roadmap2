@@ -41,10 +41,10 @@
             {{ $input['star'] }}
             <input id="star" name="star" class="form-control bg-gray-50 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:bg-white focus:border-blue-500 focus:outline-none focus:shadow-outline" value="{{ $input['star'] }}" type="hidden">
             
-            @if(!is_null($formItems_image)) 
+            @if(!is_null($fullpath)) 
               <div class="thumb mb-5">
-                <img src="{{ $formItems_image }}" alt="">
-                <input type="hidden" id="image_id" name="image_id" value="{{ $formItems_image }}">
+                <img src="{{ Storage::disk('s3')->url($fullpath) }}" alt="">
+                <input type="hidden" id="image_id" name="image_id" value="{{ $fullpath }}">
               </div>
             @endif
 

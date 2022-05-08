@@ -34,10 +34,7 @@ class ReviewController extends Controller
         if($request->hasFile('image_id')) {
             $file = $request->file('image_id');
             $path = Storage::disk('s3')->putFile('/', $file); // S3バケットへアップロードする
-            $formItems_image = [$file->getRealPath(), $file->getClientOriginalName(), $path];
-            $request->session()->put("image_input", $formItems_image);
-            //review_image_urlという名前で$urlをsessionに保存
-            $request->session()->put('review_image_url', $path);
+            $request->session()->put('review_image_url', $path); //review_image_urlという名前で$urlをsessionに保存
         }
         return redirect()->action("App\Http\Controllers\ReviewController@confirm", $restaurant);
     }
@@ -46,14 +43,14 @@ class ReviewController extends Controller
     {
         $restaurant = Restaurant::find($id);
         $input = $request->session()->get("form_input");
-        $formItems_image =  $request->session()->get("review_image_url");
+        $fullpath =  $request->session()->get("review_image_url");
         //セッションに値が無い時はフォームに戻る
 		if(!$input){
 			return redirect()->action("App\Http\Controllers\RestaurantController@show", $restaurant);
-		} elseif(!$formItems_image) {
+		} elseif(!$fullpath) {
             return view("review.confirm", compact('input', 'restaurant'));
         }
-		return view("review.confirm", compact('input', 'formItems_image', 'restaurant'));
+		return view("review.confirm", compact('input', 'fullpath', 'restaurant'));
     }
 
     public function complete(){	
